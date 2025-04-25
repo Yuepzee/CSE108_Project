@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cftvjtevt7l2k"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Host" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 48.0
+offset_right = 86.0
+offset_bottom = 31.0
+text = "Join"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 95.0
+offset_right = 205.0
+offset_bottom = 31.0
+text = "Username"
+
+[node name="Send" type="Button" parent="."]
+offset_top = 37.0
+offset_right = 47.0
+offset_bottom = 68.0
+text = "Send"
+
+[node name="Message" type="LineEdit" parent="."]
+offset_top = 73.0
+offset_right = 350.0
+offset_bottom = 104.0
+text = "Message"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_top = -253.0
+offset_right = 300.0
+offset_bottom = -3.0
+editable = false
