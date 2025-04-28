@@ -1,38 +1,50 @@
-[gd_scene format=3 uid="uid://cftvjtevt7l2k"]
+[gd_scene load_steps=2 format=3 uid="uid://cftvjtevt7l2k"]
+
+[ext_resource type="Script" uid="uid://bm3aoygxiityl" path="res://Scenes/chat_room.gd" id="1_jqiim"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_jqiim")
 
 [node name="Host" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 41.0
+offset_top = 6.0
+offset_right = 85.0
+offset_bottom = 37.0
 text = "Host"
 
 [node name="Join" type="Button" parent="."]
-offset_left = 48.0
-offset_right = 86.0
-offset_bottom = 31.0
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 40.0
+offset_bottom = 37.0
 text = "Join"
 
-[node name="LineEdit" type="LineEdit" parent="."]
-offset_left = 95.0
-offset_right = 205.0
-offset_bottom = 31.0
+[node name="Username" type="LineEdit" parent="."]
+offset_left = 86.0
+offset_top = 6.0
+offset_right = 196.0
+offset_bottom = 37.0
 text = "Username"
 
 [node name="Send" type="Button" parent="."]
-offset_top = 37.0
-offset_right = 47.0
-offset_bottom = 68.0
+offset_left = 1.0
+offset_top = -42.0
+offset_right = 48.0
+offset_bottom = -11.0
 text = "Send"
 
 [node name="Message" type="LineEdit" parent="."]
-offset_top = 73.0
+offset_top = -74.0
 offset_right = 350.0
-offset_bottom = 104.0
+offset_bottom = -43.0
 text = "Message"
 
-[node name="TextEdit" type="TextEdit" parent="."]
-offset_top = -253.0
-offset_right = 300.0
-offset_bottom = -3.0
+[node name="Messages" type="TextEdit" parent="."]
+offset_top = -324.0
+offset_right = 350.0
+offset_bottom = -74.0
 editable = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(167, -137)
+zoom = Vector2(1.5, 1.5)
