@@ -27,8 +27,8 @@ func _on_send_pressed():
 
 @rpc ("any_peer", "call_local")
 
-func msg_rpc(user, data):
-	message.text += str(user, ": ", data, "/n")
+func msg_rpc(real_user, data):
+	message.text += str(real_user, ": ", data, "\n")
 
 func joined():
 	host.hide()
