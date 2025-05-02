@@ -40,14 +40,22 @@ offset_bottom = -43.0
 text = "Message"
 
 [node name="Messages" type="TextEdit" parent="."]
-offset_top = -324.0
-offset_right = 350.0
-offset_bottom = -74.0
+offset_left = 351.0
+offset_top = -304.0
+offset_right = 701.0
+offset_bottom = -54.0
 editable = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(167, -137)
 zoom = Vector2(0.4, 0.4)
+
+[node name="ChatDisplay" type="TextEdit" parent="."]
+offset_left = 5.0
+offset_top = -322.0
+offset_right = 352.0
+offset_bottom = -75.0
+editable = false
 
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
