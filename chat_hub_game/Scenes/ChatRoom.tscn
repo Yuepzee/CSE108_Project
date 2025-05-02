@@ -4,6 +4,7 @@
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(1, 1)
+scale = Vector2(1.00189, 1)
 script = ExtResource("1_jqiim")
 
 [node name="Host" type="Button" parent="."]
@@ -22,6 +23,7 @@ offset_right = 37.0
 offset_bottom = 24.0
 scale = Vector2(0.18, 0.18)
 text = "Join"
+metadata/_edit_use_anchors_ = true
 
 [node name="Username" type="LineEdit" parent="."]
 offset_left = 14.0
@@ -30,6 +32,7 @@ offset_right = 131.0
 offset_bottom = 24.0
 scale = Vector2(0.18, 0.18)
 placeholder_text = "Username"
+metadata/_edit_use_anchors_ = true
 
 [node name="Send" type="Button" parent="."]
 offset_left = -1.0
@@ -38,6 +41,7 @@ offset_right = 46.0
 offset_bottom = 18.0
 scale = Vector2(0.18, 0.18)
 text = "Send"
+metadata/_edit_use_anchors_ = true
 
 [node name="Message" type="LineEdit" parent="."]
 offset_left = -1.0
@@ -46,6 +50,7 @@ offset_right = 128.0
 offset_bottom = 11.0
 scale = Vector2(0.23, 0.23)
 placeholder_text = "Message"
+metadata/_edit_use_anchors_ = true
 
 [node name="Messages" type="TextEdit" parent="."]
 visible = false
@@ -60,12 +65,13 @@ position = Vector2(167, -137)
 zoom = Vector2(0.4, 0.4)
 
 [node name="ChatDisplay" type="TextEdit" parent="."]
-offset_left = -1.0
-offset_top = -57.0
-offset_right = 199.0
-offset_bottom = 141.0
-scale = Vector2(0.19, 0.19)
+offset_left = -0.998109
+offset_top = -120.0
+offset_right = 199.002
+offset_bottom = 78.0
+scale = Vector2(0.5, 0.5)
 editable = false
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

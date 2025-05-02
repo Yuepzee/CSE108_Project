@@ -18,7 +18,7 @@ func _ready():
 # Called when T key toggles the chat visibility
 func _process(_delta):
 	# When visible and Send button is pressed or Enter key is pressed while input has focus
-	if visible and message.has_focus() and Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and not Input.is_key_pressed(KEY_SPACE):
 		_on_send_pressed()
 
 func _on_host_pressed():
