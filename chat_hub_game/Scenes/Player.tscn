@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhfed1vb588c0"]
+[gd_scene load_steps=29 format=3 uid="uid://dhfed1vb588c0"]
 
 [ext_resource type="Script" uid="uid://wnxmqafun45m" path="res://Scenes/player_stuff.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://bbui6vnyopbdi" path="res://assets/Base_Char_Black.png" id="1_rpqav"]
+[ext_resource type="PackedScene" uid="uid://cftvjtevt7l2k" path="res://Scenes/ChatRoom.tscn" id="3_gntrk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpqav"]
 size = Vector2(9, 6)
@@ -263,3 +264,5 @@ limit_top = -17
 limit_right = 1150
 limit_bottom = 646
 editor_draw_limits = true
+
+[node name="ChatMenu" parent="CharacterBody2D" instance=ExtResource("3_gntrk")]

@@ -5,10 +5,21 @@ extends Node2D
 @onready var username = $Username
 @onready var send = $Send
 @onready var message = $Message
-@onready var chat_display = $ChatDisplay  # Add a separate TextEdit or RichTextLabel for displaying messages
+@onready var chat_display = $ChatDisplay
 
 var real_user : String
 var msg : String
+var is_initialized = false
+
+func _ready():
+	# Hide the chat UI by default
+	visible = false
+
+# Called when T key toggles the chat visibility
+func _process(_delta):
+	# When visible and Send button is pressed or Enter key is pressed while input has focus
+	if visible and message.has_focus() and Input.is_action_just_pressed("ui_accept"):
+		_on_send_pressed()
 
 func _on_host_pressed():
 	var peer = ENetMultiplayerPeer.new()
@@ -20,7 +31,8 @@ func _on_host_pressed():
 	join.hide()
 	real_user = username.text
 	username.hide()
-	print("Hosting server as: " + real_user)  # Debug print
+	is_initialized = true
+	print("Hosting server as: " + real_user)
 
 func _on_join_pressed():
 	var peer = ENetMultiplayerPeer.new()
@@ -28,18 +40,21 @@ func _on_join_pressed():
 	get_tree().set_multiplayer(SceneMultiplayer.new(), self.get_path())
 	multiplayer.multiplayer_peer = peer
 	joined()
-	print("Joined server as: " + real_user)  # Debug print
+	is_initialized = true
+	print("Joined server as: " + real_user)
 
 func _on_send_pressed():
-	if message.text.strip_edges() != "":
-		print("Sending message: " + message.text)  # Debug print
+	if message.text.strip_edges() != "" and is_initialized:
+		print("Sending message: " + message.text)
 		rpc("msg_rpc", real_user, message.text)
-		message.text = ""  # Clear the input field after sending
+		message.text = ""
+		# Return focus to message input for continuous chat
+		message.grab_focus()
 
 @rpc("any_peer", "call_local")
 func msg_rpc(username, data):
-	print("Received message from " + username + ": " + data)  # Debug print
-	chat_display.text += str(username, ": ", data, "\n")  # Add to display field, not input field
+	print("Received message from " + username + ": " + data)
+	chat_display.text += str(username, ": ", data, "\n")
 
 func joined():
 	host.hide()
