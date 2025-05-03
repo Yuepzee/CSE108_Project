@@ -266,3 +266,4 @@ limit_bottom = 646
 editor_draw_limits = true
 
 [node name="ChatMenu" parent="CharacterBody2D" instance=ExtResource("3_gntrk")]
+position = Vector2(15, 1)

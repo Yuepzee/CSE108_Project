@@ -24,10 +24,19 @@ text = "Join"
 metadata/_edit_use_anchors_ = true
 
 [node name="Username" type="LineEdit" parent="."]
-offset_left = 14.0
+offset_left = 16.0
 offset_top = -7.0
-offset_right = 131.0
+offset_right = 133.0
 offset_bottom = 24.0
+scale = Vector2(0.18, 0.18)
+placeholder_text = "Username"
+metadata/_edit_use_anchors_ = true
+
+[node name="UsernameLabel" type="LineEdit" parent="."]
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 92.0
+offset_bottom = 11.0
 scale = Vector2(0.18, 0.18)
 placeholder_text = "Username"
 metadata/_edit_use_anchors_ = true

@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var chat_menu = $ChatMenu  # Reference to your chat menu scene
+@onready var username_label = $UsernameLabel
 
 var chat_open = false  # Track if chat is open
 
