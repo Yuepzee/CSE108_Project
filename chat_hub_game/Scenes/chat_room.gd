@@ -27,7 +27,7 @@ func _process(delta):
 			message.grab_focus()
 	
 	# When visible and Send button is pressed or Enter key is pressed while input has focus
-	if visible and Input.is_action_just_pressed("ui_accept") and message.has_focus():
+	if visible and Input.is_action_just_pressed("ui_accept") and message.has_focus() and not Input.is_key_pressed(KEY_SPACE):
 		_on_send_pressed()
 	
 	# Handle WebSocket state
