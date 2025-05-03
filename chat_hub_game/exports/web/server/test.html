@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h2>WebSocket Test</h2>
+    <div id="output"></div>
+    <script>
+        const ws = new WebSocket("ws://127.0.0.1:8080");
+        const output = document.getElementById("output");
+        
+        ws.onopen = function() {
+            output.innerHTML += "<p>Connected to server</p>";
+            ws.send(JSON.stringify({
+                event: "register_user",
+                data: { username: "TestUser" }
+            }));
+        };
+        
+        ws.onmessage = function(e) {
+            output.innerHTML += "<p>Received: " + e.data + "</p>";
+        };
+        
+        ws.onerror = function(e) {
+            output.innerHTML += "<p>Error: " + e + "</p>";
+        };
+        
+        ws.onclose = function() {
+            output.innerHTML += "<p>Connection closed</p>";
+        };
+    </script>
+</body>
+</html>

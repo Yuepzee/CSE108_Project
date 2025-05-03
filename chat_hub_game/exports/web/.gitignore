@@ -1,0 +1,14 @@
+# Node.js dependencies
+node_modules/
+
+# Python virtual environment
+.venv/
+
+# Optional: Bytecode and general Python ignores
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Optional: OS-generated files
+.DS_Store
+Thumbs.db

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv162co3sm43e"
-path="res://.godot/imported/Chat_Hub_Game.icon.png-3a9a36cead0c856a197449a38d9565a4.ctex"
+uid="uid://ukei6817gi1k"
+path="res://.godot/imported/index.apple-touch-icon.png-b9ffd2472ba4bd0fa4a7f5a6b635e2f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://exports/web/game/Chat_Hub_Game.icon.png"
-dest_files=["res://.godot/imported/Chat_Hub_Game.icon.png-3a9a36cead0c856a197449a38d9565a4.ctex"]
+source_file="res://exports/web/game/index.apple-touch-icon.png"
+dest_files=["res://.godot/imported/index.apple-touch-icon.png-b9ffd2472ba4bd0fa4a7f5a6b635e2f8.ctex"]
 
 [params]
 

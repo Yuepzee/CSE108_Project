@@ -12,125 +12,73 @@ html, body {
 	font-family: Arial, sans-serif;
     color: white;
 	background-color: #242424;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
 }
 
-body {
+/* New layout with absolute positioning */
+.page-container {
+    position: relative;
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
 }
 
-.content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.header {
+    padding: 10px 20px;
+    background-color: #333;
+    text-align: center;
     position: relative;
-    z-index: 1;
+    z-index: 50;
+}
+
+.game-section {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    z-index: 5;
 }
 
 .game-container {
     position: relative;
     width: 100%;
     max-width: 640px;
-    height: 320px;
-    border: 1px solid #333;
-    margin-bottom: 20px;
-    margin: 0 auto 20px auto;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    margin: 0 auto;
+    border: 2px solid #333;
+    background-color: #111;
+    overflow: hidden;
 }
 
-#canvas {
-	display: block;
+.chat-section {
+    position: relative;
+    margin-top: 450px; /* Space below the game section */
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    padding: 20px;
+    z-index: 20;
 }
 
-#canvas:focus {
-	outline: none;
-}
-
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
-#status {
-	background-color: #242424;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-}
-
-#status-splash.show-image--false {
-	display: none;
-}
-
-#status-splash.fullsize--true {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-}
-
-#status-splash.use-filter--false {
-	image-rendering: pixelated;
-}
-
-#status-progress, #status-notice {
-	display: none;
-}
-
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
-}
-
-#status-notice {
-	background-color: #5b3943;
-	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
-	margin: 0 2rem;
-	overflow: hidden;
-	padding: 1rem;
-	text-align: center;
-	z-index: 1;
-}
-
+/* Make sure everything in chat section stays on top */
 #login-container, #chat-container {
+    position: relative;
+    z-index: 30;
+    width: 80%;
+    max-width: 640px;
+    margin: 0 auto;
     border: 1px solid #444;
     padding: 20px;
     border-radius: 5px;
     background-color: #333;
-    margin-top: 20px;
-	
 }
 
 #chat-container {
     display: none;
-	
 }
 
 #chat-messages {
@@ -169,39 +117,131 @@ button:hover {
 h1, h2 {
     color: #4CAF50;
 }
+
+/* Canvas styling */
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#canvas:focus {
+    outline: none;
+}
+
+/* Status overlay styling */
+#status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #242424;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 40;
+}
+
+#status-splash {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+#status-splash.show-image--false {
+    display: none;
+}
+
+#status-splash.fullsize--true {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+#status-splash.use-filter--false {
+    image-rendering: pixelated;
+}
+
+#status-progress, #status-notice {
+    display: none;
+}
+
+#status-progress {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#status-notice {
+    background-color: #5b3943;
+    border-radius: 0.5rem;
+    border: 1px solid #9b3943;
+    color: #e0e0e0;
+    font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+    line-height: 1.3;
+    margin: 0 2rem;
+    overflow: hidden;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Extra space at bottom to ensure we can scroll */
+@media (max-width: 800px) {
+    .game-container {
+        max-width: 90%;
+    }
+    
+    #login-container, #chat-container {
+        width: 90%;
+    }
+}
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
         <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 	</head>
 	<body>
-		<div class="content-container">
-            <h1>Chat Hub Game</h1>
+		<div class="page-container">
+            <div class="header">
+                <h1>Chat Hub Game</h1>
+            </div>
             
-            <div class="game-container">
-                <canvas id="canvas">
-                    Your browser does not support the canvas tag.
-                </canvas>
-                <div id="status">
-                    <img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
-                    <progress id="status-progress"></progress>
-                    <div id="status-notice"></div>
+            <div class="game-section">
+                <div class="game-container">
+                    <canvas id="canvas">
+                        Your browser does not support the canvas tag.
+                    </canvas>
+                    <div id="status">
+                        <img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
+                        <progress id="status-progress"></progress>
+                        <div id="status-notice"></div>
+                    </div>
                 </div>
             </div>
 
-            <div id="login-container">
-                <h2>Join Chat</h2>
-                <input type="text" id="username-input" placeholder="Enter your username">
-                <button id="join-button">Join</button>
-            </div>
-            
-            <div id="chat-container">
-                <h2>Chat Room</h2>
-                <div id="chat-messages"></div>
-                <div id="message-form">
-                    <input type="text" id="message-input" placeholder="Type your message...">
-                    <button id="send-button">Send</button>
+            <div class="chat-section">
+                <div id="login-container">
+                    <h2>Join Chat</h2>
+                    <input type="text" id="username-input" placeholder="Enter your username">
+                    <button id="join-button">Join</button>
+                </div>
+                
+                <div id="chat-container">
+                    <h2>Chat Room</h2>
+                    <div id="chat-messages"></div>
+                    <div id="message-form">
+                        <input type="text" id="message-input" placeholder="Type your message...">
+                        <button id="send-button">Send</button>
+                    </div>
                 </div>
             </div>
+            
+            <div class="footer-space"></div>
         </div>
 
 		<noscript>
@@ -226,15 +266,15 @@ const engine = new Engine(GODOT_CONFIG);
 		if (statusMode === mode || !initializing) {
 			return;
 		}
-		// CHANGED: Don't hide the status overlay completely, just make it invisible AND remove it from flow
 		if (mode === 'hidden') {
+			// Instead of just hiding, completely remove from layout flow
 			statusOverlay.style.visibility = 'hidden';
-			statusOverlay.style.zIndex = '-1'; // Push it behind other content
+			statusOverlay.style.zIndex = '-5'; // Push it way behind other content
 			initializing = false;
 			return;
 		}
 		statusOverlay.style.visibility = 'visible';
-		statusOverlay.style.zIndex = '10'; // Keep it above other content while visible
+		statusOverlay.style.zIndex = '40'; // Make sure it's above other content
 		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
 		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
 		statusMode = mode;
