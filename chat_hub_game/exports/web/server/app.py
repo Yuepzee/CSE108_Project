@@ -1,8 +1,33 @@
 # server.py - Flask SocketIO WebSocket server
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
+from flask import Flask, render_template, request, jsonify
+from flask_socketio import SocketIO, emit, join_room
 from flask_cors import CORS
 import json
+import jwt
+from datetime import datetime, timedelta
+
+
+# Secret key for encoding and decoding JWT tokens
+SECRET_KEY = 'godot-chat-secret'
+
+users_db = {
+    'testuser': {'password': 'password123'},
+}
+
+def generate_token(username):
+    expiration_time = datetime.utcnow() + timedelta(hours=1)
+    token = jwt.encode({'username': username, 'exp': expiration_time}, SECRET_KEY, algorithm='HS256')
+    return token
+
+# Function to verify JWT token
+def verify_token(token):
+    try:
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return decoded
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -13,18 +38,38 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 clients = {}
 client_count = 0
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    if username in users_db and users_db[username]['password'] == password:
+        token = generate_token(username)
+        return jsonify({'token': token})
+    else:
+        return jsonify({'message': 'Invalid credentials'}), 401
+
 @app.route('/')
 def index():
     return "Godot Chat WebSocket Server is running"
 
 @socketio.on('connect')
 def handle_connect():
-    global client_count
-    client_id = client_count
-    client_count += 1
-    clients[request.sid] = {'id': client_id, 'username': None}
-    print(f"Client {client_id} connected with SID: {request.sid}")
+    token = request.args.get('token')  # You can pass the token via query param or headers
+    if not token:
+        emit('error', {'message': 'Authentication token required'})
+        return
 
+    decoded_token = verify_token(token)
+    if decoded_token:
+        client_id = client_count
+        client_count += 1
+        clients[request.sid] = {'id': client_id, 'username': decoded_token['username']}
+        print(f"Client {client_id} connected with SID: {request.sid}, Username: {decoded_token['username']}")
+    else:
+        emit('error', {'message': 'Invalid or expired token'})
+        return
 @socketio.on('disconnect')
 def handle_disconnect():
     client_id = clients[request.sid]['id'] if request.sid in clients else 'Unknown'
