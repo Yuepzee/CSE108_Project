@@ -22,8 +22,13 @@ func _process(_delta):
 		_on_send_pressed()
 
 func _on_host_pressed():
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(1027)
+	var peer := WebSocketMultiplayerPeer.new()
+	var result = peer.create_server(8080)
+	
+	if result != OK:
+		print("Failed to start server")
+		return
+
 	get_tree().set_multiplayer(SceneMultiplayer.new(), self.get_path())
 	multiplayer.multiplayer_peer = peer
 	# Setup UI for host
@@ -35,8 +40,8 @@ func _on_host_pressed():
 	print("Hosting server as: " + real_user)
 
 func _on_join_pressed():
-	var peer = ENetMultiplayerPeer.new()
-	peer.create_client("127.0.0.1", 1027)
+	var peer = WebSocketMultiplayerPeer.new()
+	peer.create_client("ws://localhost:8080")
 	get_tree().set_multiplayer(SceneMultiplayer.new(), self.get_path())
 	multiplayer.multiplayer_peer = peer
 	joined()
