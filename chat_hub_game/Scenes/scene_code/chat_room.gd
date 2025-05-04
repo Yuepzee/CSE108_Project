@@ -9,7 +9,7 @@ extends Node2D
 var real_user : String
 var is_connected = false
 var websocket = WebSocketPeer.new()
-var server_url = "ws://localhost:8080"  # Change this to your server's address when deploying
+var server_url = "wss://cse108-project.onrender.com" # Change this to your server's address when deploying
 
 # For toggling chat visibility
 var is_chat_visible = false
