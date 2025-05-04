@@ -1,9 +1,0 @@
-{
-    "builds": [
-      { "src": "chat_hub_game/exports/web/game/**", "use": "@vercel/static" }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "chat_hub_game/exports/web/game/index.html" }
-    ]
-
-}
