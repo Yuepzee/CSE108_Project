@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cftvjtevt7l2k"]
 
-[ext_resource type="Script" uid="uid://bm3aoygxiityl" path="res://Scenes/chat_room.gd" id="1_jqiim"]
+[ext_resource type="Script" uid="uid://bm3aoygxiityl" path="res://Scenes/scene_code/chat_room.gd" id="1_jqiim"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_jqiim")
