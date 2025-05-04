@@ -380,7 +380,7 @@ const engine = new Engine(GODOT_CONFIG);
 					}
 					
 					// Connect to WebSocket server
-					socket = new WebSocket('ws://localhost:8080');
+					socket = new WebSocket('wss://cse108-project.onrender.com');
 					
 					socket.onopen = () => {
 						console.log('Connected to server');
